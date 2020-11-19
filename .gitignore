@@ -1,5 +1,6 @@
 *.bak
 *.mpf
+*.mti
 /transcript
 /.idea
 /work
