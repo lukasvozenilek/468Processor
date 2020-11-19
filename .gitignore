@@ -1,0 +1,6 @@
+*.bak
+*.mpf
+/transcript
+/.idea
+/work
+/venv
