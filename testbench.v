@@ -38,17 +38,24 @@ begin
 $monitor($time, "ps, clk: %d, instruction: %b, source1: %d, source2: %d, alu_result: %d, PC: %d, RAM_databus: %d, RAM_RW: %d, REG_IN: %d, RAM_ADDR: %d, ADR_select: %d, LDR_select: %d, Flags: %b", clk, instruction, source1, source2, ALU_result, PC_Addr, databus,RAM_RW, REG_IN, RAM_ADDR, ADR_select, LDR_select, flags);
 
 //Load data.txt into memory
-$readmemb("data.txt", ram.Memory);
+$readmemb("startram.txt", ram.Memory);
 
 //Reset process
 reset = 0;
 clk = 0;
 #1 reset = 1;
 #1 reset = 0;
-
 end
+
 always
 begin
 #10 clk = ~clk;
+
+//Stop simulation and save memory to file when we reach a no-op
+if (instruction == 32'b00001111000000000000000000000000) 
+begin
+	$writememb("endram.txt", ram.Memory);
+	$stop;
+end
 end
 endmodule 

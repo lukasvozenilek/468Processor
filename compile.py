@@ -177,5 +177,7 @@ for line in ProgramFile:
     RAMFile.write(format(instruction, '032b') + "\n")
     i += 1
 
+# Finally write NOP to halt simulation
+RAMFile.write("00001111000000000000000000000000")
 RAMFile.close()
 ProgramFile.close()
