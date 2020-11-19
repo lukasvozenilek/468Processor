@@ -1,7 +1,5 @@
-
 module alu (clk, reset, result, register1, register2, instruction, flags, modified_opcode);
 input clk, reset;
-
 input [31:0] register1, register2, instruction;
 
 //Instruction decoding
@@ -26,61 +24,43 @@ begin
 	flags = flags_from_module;
 	modified_opcode = opcode;
 	case(cond)
-	// nzcv // flags[0] is overflow // flags[1] is carry // flags[2] is zero // flags[3] is negative 
 		4'h1: begin //execute if equal
 			if(~flags[2])
-				begin
-					modified_opcode = 4'hF; //NOP
-				end
+				modified_opcode = 4'hF; //NOP
 			end
-
 		4'h2: begin //execute if greater than
 			if(flags[2] | ~(flags[3] == flags[0]))
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 
 		4'h3: begin //execute if less than
 			if(flags[3] == flags[0]) 
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 		 
 		4'h4: begin //execute if greater than or equal to
 			if(flags[3] != flags[0])
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 		
 		4'h5: begin //execute if less than or equal to
 			if(~flags[2] & (flags[3] == flags[0]))
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 		
 		4'h6: begin //execute if unsigned higher
 			if(~flags[1] | flags[2]) 
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 
 		4'h7: begin //execute if unsigned higher
 			if(flags[1]) 
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 
 		4'h8: begin //execute if unsigned higher
 			if(~flags[1]) 
-				begin
-					modified_opcode = 4'hF; // NOP
-				end
+				modified_opcode = 4'hF; // NOP
 			end
 
 		default: modified_opcode = opcode;
@@ -190,11 +170,9 @@ begin
 	endcase
 	
 assign result = arithmetic_result[31:0];
-	
 end
 
-//setflags(clk,S,opcode,in1,in2,result,flags);
-setflags setflags (clk, reset, s, opcode, register1, register2, arithmetic_result, flags_from_module);
+setflags flagmodule (clk, reset, s, opcode, register1, register2, arithmetic_result, flags_from_module);
 
 endmodule
 

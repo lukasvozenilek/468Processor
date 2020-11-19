@@ -1,16 +1,4 @@
-module MemoryControl 
-(
-clock,
-opcode, 
-databus, 
-source1, 
-source2, 
-LDR_select, 
-LDR_out,
-RAM_RW,
-ADR_select,
-ADR_out
-);
+module MemoryControl (clock, opcode, databus, source1, source2, LDR_select, LDR_out, RAM_RW, ADR_select, ADR_out);
 	inout[31:0] databus;
 	input[3:0] opcode;
 	input[31:0] source1, source2;
