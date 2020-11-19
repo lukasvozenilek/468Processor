@@ -18,7 +18,7 @@ MemoryControl mem(clk, instruction[27:24], databus, source1, source2, LDR_select
 
 RAM ram (databus, clk, RAM_RW, RAM_ADDR, reset);
 
-InstructionRegister IR(clk, reset, (!LDR_select && !RAM_RW), databus, instruction, modified_opcode);
+InstructionRegister IR(clk, reset, PC_Addr, (!LDR_select && !RAM_RW), databus, instruction, modified_opcode);
 
 alu mainALU(clk, reset, ALU_result, source1, source2, instruction, flags, modified_opcode);
 
@@ -52,7 +52,7 @@ begin
 #10 clk = ~clk;
 
 //Stop simulation and save memory to file when we reach a no-op
-if (instruction == 32'b00001111000000000000000000000000) 
+if (instruction == 32'b00001111000000000000000000000000 && clk) 
 begin
 	$writememb("endram.txt", ram.Memory);
 	$stop;

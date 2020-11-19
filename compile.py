@@ -1,5 +1,5 @@
 # Open memory for writing and program source for reading
-RAMFile = open("data.txt", "w")
+RAMFile = open("startram.txt", "w")
 ProgramFile = open("program.asm", "r")
 
 # Defines instruction opcode and argument requirements
@@ -177,7 +177,7 @@ for line in ProgramFile:
     RAMFile.write(format(instruction, '032b') + "\n")
     i += 1
 
-# Finally write NOP to halt simulation
+# Finally write NOP as last instruction to halt simulation
 RAMFile.write("00001111000000000000000000000000")
 RAMFile.close()
 ProgramFile.close()

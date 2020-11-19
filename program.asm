@@ -1,10 +1,15 @@
-MOV R5 #12
-MOV R1 #4
-MOV R4 #8
-MOV R2 #6
-ADD R3 R1 R2
-MOV R4 R2 LSL #2
-MUL R5 R1 R2
-SUB S R7 R5 R4
-CMP R4 R3
-MOV EQ R3 #127
+//Increment
+MOV R0 #1
+//Max value
+MOV R1 #100
+//Starting memory address
+MOV R2 #30
+
+//Start of loop
+//Add increment to R3
+ADD R3 R3 R0
+//Store R3 to R2 location in RAM
+STR R3 R2
+//Check for max
+CMP R3 R1
+B LT 3
