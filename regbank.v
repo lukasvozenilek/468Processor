@@ -40,8 +40,7 @@ module regbank (opcode, source1, source2, reset, clk, destination, D, S1, S2, PC
          	 R14(Q14, D, en[14] & load, reset, clk);
 	
 	//R15 defined seperately to utilize parameter
-	register #(1) R15(Q15, D, en[15] & load, reset, clk);
-         
+		register #(1) R15(Q15, D, en[15] & load, reset, clk);
 
 	// Instantiate Source1 and Source2 Muxes
 	// fetch S1 = IR[14:11] and S2 = IR[18:15] from instruction

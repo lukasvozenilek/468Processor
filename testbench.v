@@ -13,7 +13,7 @@ module Processor;
 	reg reset, clk;
 
 	//Modules
-	MemoryControl mem(clk, instruction[27:24], databus, source1, source2, LDR_select, LDR_out, RAM_RW, ADR_select, ADR_out);
+	MemoryControl mem(clk, reset, instruction[27:24], databus, source1, source2, LDR_select, LDR_out, RAM_RW, ADR_select, ADR_out);
 
 	RAM ram (databus, clk, RAM_RW, RAM_ADDR, reset);
 
@@ -44,6 +44,7 @@ module Processor;
 
 	always
 		begin
+		//Pulse clock
 		#10 clk = ~clk;
 
 		//Stop simulation and save memory to file when we reach a no-op
